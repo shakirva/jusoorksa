@@ -1,3 +1,62 @@
+<!-- <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
+// Initialize messages
+$successMsg = "";
+$errorMsg = "";
+
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = htmlspecialchars($_POST["name"]);
+    $email = htmlspecialchars($_POST["email"]);
+    $message = htmlspecialchars($_POST["message"]);
+
+    // Validate fields
+    if (empty($name) || empty($email) || empty($message)) {
+        $errorMsg = "Please fill in all fields.";
+    } else {
+        // Setup PHPMailer
+        $mail = new PHPMailer(true);
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com'; // Change this
+            $mail->SMTPAuth = true;
+            $mail->Username = 'vashakir245@gmail.com'; // Change this
+            $mail->Password = 'ehopumsikcennhws'; // Change this
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587; // Change this if needed
+
+            $mail->setFrom($email, $name);
+            $mail->addAddress('shakirshaki245@gmail.com'); // Change this
+
+            $mail->Subject = 'New Contact Form Submission';
+            $mail->isHTML(true);
+            $mail->Body = "<h2>Contact Form Submission</h2>
+                           <p><strong>Name:</strong> $name</p>
+                           <p><strong>Email:</strong> $email</p>
+                           <p><strong>Message:</strong> $message</p>";
+
+            if ($mail->send()) {
+                $successMsg = "Message sent successfully!";
+            } else {
+                $errorMsg = "Message could not be sent.";
+            }
+        } catch (Exception $e) {
+            $errorMsg = "Mailer Error: " . $mail->ErrorInfo;
+        }
+    }
+}
+?> -->
+
+
+
+
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
   <head>
@@ -954,17 +1013,30 @@
                 <p class="mb-0">Reach out to us via phone, email, or through our convenient online form.  We look forward to hearing from you and helping you plan your  unforgettable experience at Jussor Residency.</p>
               </div>
               <div class="cs_height_37 cs_height_lg_37"></div>
-              <form action="#" class="cs_form cs_style_2">
-                <label>Full Name*</label>
-                <input type="text" class="cs_form_field_2 cs_radius_20">
-                <div class="cs_height_16 cs_height_lg_16"></div>
-                <label>Email*</label>
-                <input type="text" class="cs_form_field_2 cs_radius_20">
-                <div class="cs_height_16 cs_height_lg_16"></div>
-                <label>Write Your Comment*</label>
-                <textarea cols="30" rows="6" class="cs_form_field_2 cs_radius_20"></textarea>
+
+
+              <!-- Success/Error Message -->
+              <?php if (!empty($successMsg)) : ?>
+              <p class="success-msg"><?php echo $successMsg; ?></p>
+          <?php endif; ?>
+          <?php if (!empty($errorMsg)) : ?>
+              <p class="error-msg"><?php echo $errorMsg; ?></p>
+          <?php endif; ?>
+
+              
+          <form method="POST" class="cs_form cs_style_2">
+            <label>Full Name*</label>
+            <input type="text" name="name" class="cs_form_field_2 cs_radius_20" required>
+
+            <label>Email*</label>
+            <input type="email" name="email" class="cs_form_field_2 cs_radius_20" required>
+
+            <label>Write Your Comment*</label>
+            <textarea name="message" cols="30" rows="6" class="cs_form_field_2 cs_radius_20" required></textarea>
+
+          
                 <div class="cs_height_25 cs_height_lg_25"></div>
-                <button class="cs_btn cs_style_2 cs_accent_btn cs_medium cs_radius_20 cs_fs_15">
+                <button type="submit" class="cs_btn cs_style_2 cs_accent_btn cs_medium cs_radius_20 cs_fs_15">
                   <b>Send Message</b>
                   <span>
                     <i>
