@@ -369,7 +369,7 @@
       <div class="cs_slider cs_style_1 cs_slider_gap_40">
         <div class="container">
           <div class="cs_testimonial_1_wrap">
-            <div class="cs_slider_container position-relative cs_zindex_3" data-autoplay="0" data-loop="1" data-speed="600" data-center="0" data-variable-width="0" data-slides-per-view="1">
+            <div class="cs_slider_container position-relative cs_zindex_3" data-autoplay="1" data-loop="1" data-speed="600" data-center="0" data-variable-width="0" data-slides-per-view="1">
               <div class="cs_slider_wrapper">
                 <div class="cs_slide">
                   <div class="cs_testimonial cs_style_1 text-center position-relative">
@@ -686,6 +686,32 @@
     <script src="assets/js/daterangepicker.min.js"></script>
     <script src="assets/js/lightgallery.min.js"></script>
     <script src="assets/js/YTPlayer.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var slider = document.querySelector(".cs_slider_container");
+        if (slider) {
+          var autoplaySpeed = 5000; // Adjust time in milliseconds (3000ms = 3s)
+          var sliderInstance = new Swiper(slider, {
+            loop: true,
+            autoplay: {
+              delay: autoplaySpeed,
+              disableOnInteraction: false,
+            },
+            speed: 800,
+            slidesPerView: 1,
+            navigation: {
+              nextEl: ".cs_slider_next",
+              prevEl: ".cs_slider_prev",
+            },
+            pagination: {
+              el: ".cs_pagination",
+              clickable: true,
+            },
+          });
+        }
+      });
+    </script>
+    
     <script src="assets/js/main.js"></script>
   </body>
 </html>
