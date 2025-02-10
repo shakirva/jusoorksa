@@ -6011,7 +6011,7 @@ a.ui-button:active,
 }
 @media (min-width: 1200px) {
   .cs_site_header.cs_style_1.cs_transparent_header .cs_nav_list > li > a {
-    color: #fff;
+    color: #000000;
   }
   .cs_site_header.cs_style_1.cs_transparent_header .cs_nav_list > li > a:hover {
     color: var(--accent);
@@ -6818,6 +6818,7 @@ a.ui-button:active,
   }
   .cs_nav .cs_nav_list.cs_active {
     left: 0vw;
+    background-color: #d6d1b2;
   }
   .cs_nav .cs_nav_list ul {
     padding-left: 15px;
